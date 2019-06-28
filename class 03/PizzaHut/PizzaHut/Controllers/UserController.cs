@@ -47,8 +47,11 @@ namespace PizzaHut.Controllers
                 user.City = model.City;
                 user.Address = model.Address;
                 user.Phone = model.Phone;
-            }
+                users.Add(user);
 
+                return RedirectToAction("index");
+            }
+            
             return View();
         }
 

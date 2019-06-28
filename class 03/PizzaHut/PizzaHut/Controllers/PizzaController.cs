@@ -26,8 +26,8 @@ namespace PizzaHut.Controllers
 
         public IActionResult Details(int id)
         {
-            var pica = pizzas.Get(id);
-            return View(pica);
+            var pizza = pizzas.Get(id);
+            return View(pizza);
         }
 
         [HttpGet]
@@ -92,6 +92,24 @@ namespace PizzaHut.Controllers
 
                 pizzas.Update(pizza);
                 return View("Details",pizza);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Pizza model = pizzas.Get(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Pizza pizza)
+        {
+            if (ModelState.IsValid)
+            {
+                pizzas.Delete(pizza.ID);
+                return RedirectToAction("index");
             }
             return View();
         }
